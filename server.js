@@ -1,4 +1,4 @@
-// server.js - Pure Node.js (Tanpa Admin, Hanya Halaman Utama)
+
 const http = require('http');
 const fs = require('fs');
 const path = require('path');
@@ -35,27 +35,45 @@ const mimeTypes = {
     '.txt': 'text/plain'
 };
 
-// ============ STATIC FILE HANDLER ============
-function serveStaticFile(filePath, res) {
-    const ext = path.extname(filePath);
-    const contentType = mimeTypes[ext] || 'application/octet-stream';
-    
-    fs.readFile(filePath, (err, data) => {
-        if (err) {
-            res.writeHead(404);
-            res.end('File not found');
-            return;
-        }
-        res.writeHead(200, { 'Content-Type': contentType });
-        res.end(data);
-    });
-}
-
 // ============ CORS HEADERS ============
 function setCorsHeaders(res) {
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+}
+
+// ============ STATIC FILE HANDLER ============
+function serveStaticFile(filePath, res) {
+    const ext = path.extname(filePath);
+    const contentType = mimeTypes[ext] || 'application/octet-stream';
+    
+    // Untuk Vercel: coba beberapa lokasi
+    const possiblePaths = [
+        filePath,
+        path.join(__dirname, 'public', filePath),
+        path.join(__dirname, 'public', path.basename(filePath))
+    ];
+    
+    let found = false;
+    
+    for (const p of possiblePaths) {
+        try {
+            if (fs.existsSync(p)) {
+                const data = fs.readFileSync(p);
+                res.writeHead(200, { 'Content-Type': contentType });
+                res.end(data);
+                found = true;
+                break;
+            }
+        } catch (e) {
+            // continue
+        }
+    }
+    
+    if (!found) {
+        res.writeHead(404);
+        res.end('File not found');
+    }
 }
 
 // ============ API HANDLERS ============
@@ -146,40 +164,35 @@ function handleRequest(req, res) {
     }
     
     // ===== STATIC FILES =====
-    let filePath = pathname === '/' ? '/index.html' : pathname;
-    const publicPath = path.join(__dirname, 'public', filePath);
     
-    fs.access(publicPath, fs.constants.F_OK, (err) => {
-        if (!err) {
-            serveStaticFile(publicPath, res);
-            return;
-        }
-        
-        // Coba cari di public tanpa path
-        const altPath = path.join(__dirname, 'public', pathname);
-        fs.access(altPath, fs.constants.F_OK, (err2) => {
-            if (!err2) {
-                serveStaticFile(altPath, res);
-                return;
-            }
-            
-            res.writeHead(404);
-            res.end('404 - File not found');
-        });
-    });
+    // Root path -> index.html
+    if (pathname === '/' || pathname === '') {
+        const indexPath = path.join(__dirname, 'public', 'index.html');
+        serveStaticFile(indexPath, res);
+        return;
+    }
+    
+    // Coba serve dari public folder
+    const publicPath = path.join(__dirname, 'public', pathname);
+    serveStaticFile(publicPath, res);
 }
 
 // ============ CREATE SERVER ============
 const server = http.createServer(handleRequest);
 
-server.listen(PORT, () => {
-    console.log('========================================');
-    console.log('🚀 Kang Jay Trafis');
-    console.log('========================================');
-    console.log(`📍 URL: http://localhost:${PORT}`);
-    console.log(`📋 Total Layanan: ${SERVICES.length}`);
-    console.log(`💾 Data: Hardcoded (tidak bisa diubah)`);
-    console.log('========================================');
-});
+// Untuk Vercel: export server
+if (process.env.VERCEL) {
+    module.exports = server;
+}
 
-module.exports = server;
+// Untuk local: start server
+if (!process.env.VERCEL) {
+    server.listen(PORT, () => {
+        console.log('========================================');
+        console.log('🚀 Kang Jay Trafis');
+        console.log('========================================');
+        console.log(`📍 URL: http://localhost:${PORT}`);
+        console.log(`📋 Total Layanan: ${SERVICES.length}`);
+        console.log('========================================');
+    });
+}

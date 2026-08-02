@@ -1,8 +1,12 @@
 {
   "name": "kangjay-trafis",
   "version": "1.0.0",
+  "description": "Layanan Pijat Profesional",
   "main": "server.js",
   "scripts": {
     "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=16.x"
   }
 }

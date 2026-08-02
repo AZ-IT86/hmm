@@ -1,6 +1,6 @@
 kangjay-trafis/
-├── server.js          ← Server (tanpa admin)
-├── package.json       ← Kosong
+├── server.js          ← Server 
+├── package.json       ← 
 ├── vercel.json        ← Konfigurasi Vercel
 └── public/
     ├── index.html     ← Halaman utama

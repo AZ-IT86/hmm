@@ -1,4 +1,71 @@
-<!-- ALAMAT -->
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="eAMcZVTvDMj4eKWeGgI8c7w90NALtuyMxix3lhp4z08" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>Kang Jay Trafis - Layanan Pijat Profesional</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <!-- HEADER -->
+    <header>
+        <div class="container header-container">
+            <a href="#home" class="logo">
+                <div class="logo-icon"><i class="fas fa-spa"></i></div>
+                <div class="logo-text">
+                    <h1>Kang Jay Trafis</h1>
+                    <p>Pijat Profesional</p>
+                </div>
+            </a>
+            <button class="mobile-menu-btn" id="mobileMenuBtn"><i class="fas fa-bars"></i></button>
+            <nav>
+                <ul class="nav-list">
+                    <li><a href="#home" class="nav-link active" data-nav="home"><i class="fas fa-home"></i> Beranda</a></li>
+                    <li><a href="#services" class="nav-link" data-nav="services"><i class="fas fa-spa"></i> Layanan</a></li>
+                    <li><a href="#address" class="nav-link" data-nav="address"><i class="fas fa-map-marker-alt"></i> Alamat</a></li>
+                    <li><a href="#booking" class="nav-link" data-nav="booking"><i class="fas fa-calendar-check"></i> Pesan</a></li>
+                </ul>
+            </nav>
+        </div>
+        <div class="mobile-menu" id="mobileMenu">
+            <ul>
+                <li><a href="#home" class="nav-link" data-nav="home"><i class="fas fa-home"></i> Beranda</a></li>
+                <li><a href="#services" class="nav-link" data-nav="services"><i class="fas fa-spa"></i> Layanan</a></li>
+                <li><a href="#address" class="nav-link" data-nav="address"><i class="fas fa-map-marker-alt"></i> Alamat</a></li>
+                <li><a href="#booking" class="nav-link" data-nav="booking"><i class="fas fa-calendar-check"></i> Pesan Sekarang</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- HERO -->
+    <section class="hero" id="home">
+        <div class="container">
+            <h2>Relaksasi Total untuk Tubuh & Pikiran</h2>
+            <p>Pijat profesional dengan terapis berpengalaman, menghilangkan pegal & stres</p>
+            <a href="https://wa.me/6281326558865?text=Halo%20Kang%20Jay%2C%20saya%20butuh%20konsultasi" class="cta-button" target="_blank"><i class="fab fa-whatsapp"></i> Konsultasi via WA</a>
+        </div>
+    </section>
+
+    <!-- LAYANAN -->
+    <section class="container" id="services">
+        <div class="section-title">
+            <h2>Layanan Pijat Kami</h2>
+            <p>Pilih sesuai kebutuhan Anda</p>
+        </div>
+        <div class="services" id="services-list">
+            <!-- Data akan di-load dari API -->
+        </div>
+        
+        <div class="consultation-box">
+            <h3>Butuh Konsultasi?</h3>
+            <p>Konsultasikan keluhan Anda gratis via WhatsApp dengan Kang Jay.</p>
+            <a href="https://wa.me/6281326558865?text=Konsultasi%20keluhan%20pijat" class="consultation-button" target="_blank"><i class="fab fa-whatsapp"></i> Konsultasi Gratis</a>
+        </div>
+    </section>
+
+    <!-- ALAMAT -->
 <section class="contact-section" id="address">
     <div class="container">
         <div class="section-title">
@@ -62,3 +129,92 @@
 
     </div>
 </section>
+    <!-- BOOKING -->
+    <section class="booking-section" id="booking">
+        <div class="container booking-container">
+            <div class="section-title">
+                <h2>Pesan Layanan via WhatsApp</h2>
+                <p>Isi form, langsung terkirim ke Kang Jay</p>
+            </div>
+            <form class="booking-form" id="bookingForm">
+                <div class="form-group">
+                    <label><i class="fas fa-user"></i> Nama Lengkap</label>
+                    <input type="text" id="name" placeholder="Nama Anda" required>
+                </div>
+                <div class="form-group">
+                    <label><i class="fab fa-whatsapp"></i> No. WhatsApp</label>
+                    <input type="tel" id="phone" placeholder="081234567890" required>
+                </div>
+                <div class="form-group">
+                    <label><i class="fas fa-spa"></i> Layanan</label>
+                    <select id="service" required>
+                        <option value="">Pilih Layanan</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label><i class="fas fa-calendar"></i> Tanggal</label>
+                    <input type="date" id="date" required>
+                </div>
+                <div class="form-group">
+                    <label><i class="fas fa-clock"></i> Waktu</label>
+                    <select id="time">
+                        <option value="">Pilih Waktu</option>
+                        <option>09:00</option><option>10:00</option><option>11:00</option>
+                        <option>13:00</option><option>14:00</option><option>15:00</option>
+                        <option>16:00</option><option>17:00</option><option>18:00</option>
+                        <option>19:00</option><option>20:00</option>
+                    </select>
+                </div>
+                <div class="form-group full-width">
+                    <label><i class="fas fa-comment"></i> Catatan</label>
+                    <textarea id="message" placeholder="Keluhan / permintaan khusus"></textarea>
+                </div>
+                <button type="submit" class="submit-button">
+                    <i class="fab fa-whatsapp"></i> Kirim ke WhatsApp
+                </button>
+            </form>
+        </div>
+    </section>
+
+    <!-- FLOATING WHATSAPP -->
+    <a href="https://wa.me/6281326558865?text=Halo%20Kang%20Jay%2C%20saya%20mau%20pijat" class="floating-whatsapp" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Kang Jay Trafis</h3>
+                    <p>Pijat tradisional & relaksasi untuk kesehatan tubuh</p>
+                    <div class="social-icons">
+                        <a href="https://wa.me/6281326558865"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Layanan</h3>
+                    <ul>
+                        <li><a href="#services">Pijat Relaksasi</a></li>
+                        <li><a href="#services">Pijat Refleksi</a></li>
+                        <li><a href="#services">Pijat Vitalitas</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Kontak</h3>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt"></i> Mlagen, Rembang</li>
+                        <li><i class="fab fa-whatsapp"></i> +62 813-2655-8865</li>
+                    </ul>
+                    <a href="https://wa.me/6281326558865" class="consultation-button" style="margin-top:12px; padding:8px 16px; font-size:12px;">Chat via WA</a>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2026 Kang Jay Trafis. Layanan pijat profesional.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/main.js"></script>
+</body>
+</html>
